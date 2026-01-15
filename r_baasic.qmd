@@ -1,0 +1,84 @@
+---
+title: "Stat&R"
+Author: "Moh-Moh Kyi"
+date: "2024-06-12"
+output-file: "index.html"
+---
+
+# Introduction to R Programming
+
+R is a powerful programming language and environment for statistical computing and graphics. It is widely used among statisticians and data miners for developing statistical software and data analysis. 
+## Basic Syntax Here are some basic syntax elements in R:
+
+
+```{r}
+# Assignment
+x <- 10
+y <- 20
+```
+
+# Conditional Statements
+``` {r}
+if (x > y) {
+  print("x is greater than y")
+} else {
+  print("x is not greater than y")
+}
+```
+
+# Loops
+``` {r}
+for (i in 1:5) {
+  print(i)
+}
+```
+
+# Functions
+
+``` {r}
+add <- function(a, b) {
+  return(a + b)
+}
+
+result <- add(10, 20)
+print(result)## Output: 30##
+```
+
+## Data Structures
+
+R has several built-in data structures, including vectors, lists, matrices, data frames, and factors. Here are some examples:
+
+``` {r}
+# Vectors
+x <- c(1, 2, 3, 4, 5)
+print(x)
+```
+# Lists
+``` {r}
+y <- list("apple", "banana", "cherry")
+print(y)
+```
+# Matrices
+``` {r}
+z <- matrix(1:6, nrow = 2, ncol = 3)
+print(z)
+```
+# Data Frames
+``` {r}
+data <- data.frame(
+  name = c("Alice", "Bob", "Charlie"),
+  age = c(25, 30, 35),
+  salary = c(50000, 60000, 70000)
+)
+print(data)
+```
+# Factors
+``` {r}
+gender <- factor(c("male", "female", "male", "female"))
+print(gender)
+```
+
+
+## Conclusion
+
+This is a brief introduction to R programming. R has many more features and capabilities for data analysis, statistical modeling, and visualization. Explore further to unlock its full potential!

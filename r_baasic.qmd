@@ -240,6 +240,9 @@ rsurvey_xlsx
 # tab completion : Tab (to auto-complete function and variable names)
 # multi-cursor editing : Alt + Click (to place multiple cursors for simultaneous editing)
 ```
-
+# Thank you for today lesson!
+See you in the next lesson!
+Bye!
+---
 
 

@@ -52,7 +52,9 @@ R has several built-in data structures, including vectors, lists, matrices, data
 # Vectors
 x <- c(1, 2, 3, 4, 5)
 print(x)
+
 ```
+
 # Lists
 ``` {r}
 y <- list("apple", "banana", "cherry")
@@ -72,8 +74,15 @@ data <- data.frame(
 )
 print(data)
 ```
+# Tibble
+
+```{r}
+library(tidyverse)
+tibble_example<- as.tibble(data)
+```
 # Factors
-``` {r}
+
+```{r}
 gender <- factor(c("male", "female", "male", "female"))
 print(gender)
 ```
@@ -82,3 +91,155 @@ print(gender)
 ## Conclusion
 
 This is a brief introduction to R programming. R has many more features and capabilities for data analysis, statistical modeling, and visualization. Explore further to unlock its full potential!
+
+#Installinng Packages
+```{r}
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("readr")
+install.packages("purrr")
+install.packages("tibble")
+install.packages("stringr")
+install.packages("forcats")
+```
+
+# Github
+To use GitHub with R, you can use the `usethis` and `devtools` packages. Here are some basic steps to get started:
+```{r}
+install.packages("usethis")
+install.packages("devtools")
+library(usethis)
+library(devtools)
+# Create a new GitHub repository
+usethis::create_github_repo("my-new-repo")
+# Clone an existing GitHub repository
+usethis::use_git()# Initialize a Git repository in your R project
+# Commit changes to your Git repository
+usethis::use_git_commit("Initial commit")
+# Push changes to GitHub
+usethis::use_github()_push()
+```
+# Additional Resources
+- [R Documentation](https://www.rdocumentation.org/)
+- [R for Data Science](https://r4ds.had.co.nz/)
+- [CRAN R Project](https://cran.r-project.org/)
+- [RStudio](https://rstudio.com/)
+- [GitHub Guides](https://guides.github.com/)
+- [R Markdown](https://rmarkdown.rstudio.com/)
+- [R Markdown Cheatsheet](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-cheatsheet.pdf)
+- [Tidyverse](https://www.tidyverse.org/)
+- [R Packages](https://r-pkgs.org/)
+- [R Bloggers](https://www.r-bloggers.com/)
+- [Stack Overflow R Tag](https://stackoverflow.com/questions/tagged/r)
+- [DataCamp R Courses](https://www.datacamp.com/courses/tech:r)
+- [Coursera R Programming Course](https://www.coursera.org/learn/r-programming)
+- [edX R Courses](https://www.edx.org/learn/r-programming)
+- [YouTube R Tutorials](https://www.youtube.com/results?search_query=r+programming)
+- [RStudio Community](https://community.rstudio.com/)
+- [R Weekly Newsletter](https://rweekly.org/)
+- [R-Ladies Global](https://rladies.org/)
+- [R Consortium](https://www.r-consortium.org/)
+
+# Happy Coding!
+Enjoy your journey with R programming!
+
+---
+
+# Introduction to R Programming
+R is a powerful programming language and environment for statistical computing and graphics. It is widely used among statisticians and data miners for developing statistical software and data analysis.
+## Basic Syntax
+Here are some basic syntax elements in R:
+
+```{r}
+# Github Installation
+devtools::install_github("waffle")
+```
+# Loading Packages
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(psych)
+```
+
+# Importing Data
+```{r}
+read.csv("data/2019 English R Community Survey Responses.csv")
+rsurvey_csv <- read.csv("data/2019 English R Community Survey Responses.csv")
+```
+
+# Importing Excel Data
+```{r}
+install.packages("readxl")
+library(readxl)
+
+
+read.xlsx("data/2019 English R Community Survey Responses.xlsx")
+rsurvey_xlsx <- read.xlsx("data/2019 English R Community Survey Responses.xlsx")
+```
+
+# Importing Stata Data
+```{r}
+read.dta("data/2019 English R Community Survey Responses.dta")
+rsurvey_dta <- read.dta("data/2019 English R Community Survey Responses.dta")
+```
+
+# Importing SPSS Data
+```{r}
+install.packages("haven")
+library(haven)
+
+read.spss("data/2019 English R Community Survey Responses.sav")
+rsurvey_sav <- read.spss("data/2019 English R Community Survey Responses.sav")
+```
+# Importing from Internet
+
+```{r}
+rsurvey_csv_from_net <- read.csv("https://github.com/rstudio/learning-r-survey/blob/master/2019/data/2019%20English%20R%20Community%20Survey%20Responses%20.csv?raw=true")
+```
+
+# Commenting
+```{r}
+# This is a single line comment
+/* This is a multi-line comment */
+```
+# Section Scripts
+```{r}
+# Section 1 ---
+# Section 2 ---
+```
+# Data object name
+```{r}
+rsurvey_csv
+rsurvey_xlsx
+```
+# Shortcuts
+```{r}
+# Ctrl + Enter : Run current line or selection
+# Ctrl + Shift + C : Comment/Uncomment selected lines
+# Ctrl + Shift + M : Insert pipe operator (%>%)
+# Ctrl + S : Save the current script
+# Ctrl + Shift + N : Create a new R script
+# Ctrl + 1 : Focus on Source Editor
+# Ctrl + 2 : Focus on Console
+# Ctrl + L : Clear the Console
+# Ctrl + Shift + F10 : Restart R session
+# Ctrl + Alt + I : Insert R Markdown chunk
+# Ctrl + Shift + K : Knit R Markdown document
+# Ctrl + Shift + T : Open a new tab in Source Editor
+# Ctrl + Shift + F : Find in files
+# Ctrl + Shift + H : Set working directory
+# Ctrl + Alt + B : Build and Reload package
+# Ctrl + Alt + P : Preview R Markdown document
+# Ctrl + Alt + R : Run all code in the current script
+# assign shortcut : Alt + - (to insert assignment operator <-)
+# pipe shortcut : Ctrl + Shift + M (to insert %>% operator)
+# help shortcut : F1 (to open help for the function under the cursor)
+# plot shortcut : Ctrl + Shift + P (to open the plot pane)
+# history shortcut : Ctrl + Up Arrow (to open the command history)
+# tab completion : Tab (to auto-complete function and variable names)
+# multi-cursor editing : Alt + Click (to place multiple cursors for simultaneous editing)
+```
+
+
+

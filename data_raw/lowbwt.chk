@@ -1,0 +1,28 @@
+* Check file created from import of the Stata file C:\rpractice\lowbwt.dta
+
+LABELBLOCK
+  LABEL low    0  bwt>2500g    1  bwt<=2500g  END
+  LABEL race    1  White    2  Black    3  Other  END
+  LABEL yesno    0  No    1  Yes  END
+END
+
+low
+  COMMENT LEGAL USE low
+END
+
+race
+  COMMENT LEGAL USE race
+END
+
+smoke
+  COMMENT LEGAL USE yesno
+END
+
+ht
+  COMMENT LEGAL USE yesno
+END
+
+ui
+  COMMENT LEGAL USE yesno
+END
+

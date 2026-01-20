@@ -1,0 +1,145 @@
+location,cause,sex,year,death_millions
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,1995,0.3
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,1995,0.25
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,1995,1.23
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,1995,0.98
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,1995,1.96
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,1995,1.83
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,1995,4.7
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,1995,4.48
+High Income,Injuries,Male,1995,0.42
+High Income,Injuries,Female,1995,0.2
+Upper Middle Income,Injuries,Male,1995,1.32
+Upper Middle Income,Injuries,Female,1995,0.56
+Low Income,Injuries,Male,1995,0.21
+Low Income,Injuries,Female,1995,0.11
+Lower Middle Income,Injuries,Male,1995,1
+Lower Middle Income,Injuries,Female,1995,0.54
+Upper Middle Income,Non-communicable diseases,Male,1995,6.34
+Upper Middle Income,Non-communicable diseases,Female,1995,5.5
+Lower Middle Income,Non-communicable diseases,Male,1995,4.43
+Lower Middle Income,Non-communicable diseases,Female,1995,3.63
+High Income,Non-communicable diseases,Male,1995,3.84
+High Income,Non-communicable diseases,Female,1995,3.84
+Low Income,Non-communicable diseases,Male,1995,0.7
+Low Income,Non-communicable diseases,Female,1995,0.6
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2000,2.02
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2000,1.93
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2000,0.25
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2000,0.24
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2000,1.08
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2000,0.86
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2000,4.59
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2000,4.34
+Lower Middle Income,Injuries,Male,2000,1.07
+Lower Middle Income,Injuries,Female,2000,0.57
+Low Income,Injuries,Male,2000,0.25
+Low Income,Injuries,Female,2000,0.12
+Upper Middle Income,Injuries,Male,2000,1.3
+Upper Middle Income,Injuries,Female,2000,0.52
+High Income,Injuries,Male,2000,0.4
+High Income,Injuries,Female,2000,0.2
+Low Income,Non-communicable diseases,Male,2000,0.74
+Low Income,Non-communicable diseases,Female,2000,0.65
+High Income,Non-communicable diseases,Male,2000,3.88
+High Income,Non-communicable diseases,Female,2000,3.97
+Upper Middle Income,Non-communicable diseases,Male,2000,6.88
+Upper Middle Income,Non-communicable diseases,Female,2000,5.85
+Lower Middle Income,Non-communicable diseases,Male,2000,4.93
+Lower Middle Income,Non-communicable diseases,Female,2000,4.06
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2005,0.24
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2005,0.24
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2005,4.31
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2005,4.02
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2005,0.97
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2005,0.8
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2005,1.86
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2005,1.78
+High Income,Injuries,Male,2005,0.41
+High Income,Injuries,Female,2005,0.2
+Lower Middle Income,Injuries,Male,2005,1.13
+Lower Middle Income,Injuries,Female,2005,0.58
+Low Income,Injuries,Male,2005,0.23
+Low Income,Injuries,Female,2005,0.11
+Upper Middle Income,Injuries,Male,2005,1.37
+Upper Middle Income,Injuries,Female,2005,0.51
+High Income,Non-communicable diseases,Male,2005,3.97
+High Income,Non-communicable diseases,Female,2005,4.04
+Upper Middle Income,Non-communicable diseases,Male,2005,7.62
+Upper Middle Income,Non-communicable diseases,Female,2005,6.33
+Lower Middle Income,Non-communicable diseases,Male,2005,5.42
+Lower Middle Income,Non-communicable diseases,Female,2005,4.44
+Low Income,Non-communicable diseases,Male,2005,0.8
+Low Income,Non-communicable diseases,Female,2005,0.71
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2010,0.25
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2010,0.24
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2010,0.83
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2010,0.68
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2010,1.67
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2010,1.55
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2010,3.84
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2010,3.56
+Upper Middle Income,Injuries,Male,2010,1.28
+Upper Middle Income,Injuries,Female,2010,0.46
+High Income,Injuries,Male,2010,0.4
+High Income,Injuries,Female,2010,0.2
+Lower Middle Income,Injuries,Male,2010,1.13
+Lower Middle Income,Injuries,Female,2010,0.55
+Low Income,Injuries,Male,2010,0.37
+Low Income,Injuries,Female,2010,0.2
+Upper Middle Income,Non-communicable diseases,Male,2010,8.04
+Upper Middle Income,Non-communicable diseases,Female,2010,6.55
+High Income,Non-communicable diseases,Male,2010,4.12
+High Income,Non-communicable diseases,Female,2010,4.16
+Lower Middle Income,Non-communicable diseases,Male,2010,6.06
+Lower Middle Income,Non-communicable diseases,Female,2010,4.89
+Low Income,Non-communicable diseases,Male,2010,0.87
+Low Income,Non-communicable diseases,Female,2010,0.79
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2015,0.27
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2015,0.27
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2015,0.77
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2015,0.6
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2015,3.33
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2015,3.13
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2015,1.48
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2015,1.32
+High Income,Injuries,Male,2015,0.41
+High Income,Injuries,Female,2015,0.21
+Upper Middle Income,Injuries,Male,2015,1.17
+Upper Middle Income,Injuries,Female,2015,0.42
+Lower Middle Income,Injuries,Male,2015,1.17
+Lower Middle Income,Injuries,Female,2015,0.59
+Low Income,Injuries,Male,2015,0.27
+Low Income,Injuries,Female,2015,0.13
+High Income,Non-communicable diseases,Male,2015,4.44
+High Income,Non-communicable diseases,Female,2015,4.47
+Upper Middle Income,Non-communicable diseases,Male,2015,8.51
+Upper Middle Income,Non-communicable diseases,Female,2015,6.84
+Lower Middle Income,Non-communicable diseases,Male,2015,6.72
+Lower Middle Income,Non-communicable diseases,Female,2015,5.72
+Low Income,Non-communicable diseases,Male,2015,0.96
+Low Income,Non-communicable diseases,Female,2015,0.88
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2019,0.29
+High Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2019,0.28
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2019,2.98
+Lower Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2019,2.81
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2019,0.72
+Upper Middle Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2019,0.57
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Male,2019,1.35
+Low Income,"Communicable, maternal, neonatal, and nutritional diseases",Female,2019,1.18
+High Income,Injuries,Male,2019,0.41
+High Income,Injuries,Female,2019,0.22
+Lower Middle Income,Injuries,Male,2019,1.15
+Lower Middle Income,Injuries,Female,2019,0.6
+Low Income,Injuries,Male,2019,0.27
+Low Income,Injuries,Female,2019,0.13
+Upper Middle Income,Injuries,Male,2019,1.11
+Upper Middle Income,Injuries,Female,2019,0.41
+High Income,Non-communicable diseases,Male,2019,4.84
+High Income,Non-communicable diseases,Female,2019,4.8
+Lower Middle Income,Non-communicable diseases,Male,2019,7.36
+Lower Middle Income,Non-communicable diseases,Female,2019,6.32
+Upper Middle Income,Non-communicable diseases,Male,2019,9.15
+Upper Middle Income,Non-communicable diseases,Female,2019,7.54
+Low Income,Non-communicable diseases,Male,2019,1.04
+Low Income,Non-communicable diseases,Female,2019,0.97

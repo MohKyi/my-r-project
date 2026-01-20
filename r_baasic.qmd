@@ -5,10 +5,15 @@ date: "2024-06-12"
 output-file: "index.html"
 ---
 
+
 # Introduction to R Programming
 
 R is a powerful programming language and environment for statistical computing and graphics. It is widely used among statisticians and data miners for developing statistical software and data analysis. 
+
 ## Basic Syntax Here are some basic syntax elements in R:
+```{r}
+
+```
 
 
 ```{r}
@@ -34,14 +39,18 @@ for (i in 1:5) {
 ```
 
 # Functions
+## function of basic addition
 
 ``` {r}
 add <- function(a, b) {
   return(a + b)
 }
 
-result <- add(10, 20)
-print(result)## Output: 30##
+result <- (10, 20)add
+result2 <- add(15, 15)
+
+print(result) ## Output: 30##
+result2 
 ```
 
 ## Data Structures
@@ -77,8 +86,11 @@ print(data)
 # Tibble
 
 ```{r}
+#install.packages("tidyverse")
+
 library(tidyverse)
 tibble_example<- as.tibble(data)
+print(tibble_example)
 ```
 # Factors
 
@@ -120,6 +132,7 @@ usethis::use_git_commit("Initial commit")
 # Push changes to GitHub
 usethis::use_github()_push()
 ```
+
 # Additional Resources
 - [R Documentation](https://www.rdocumentation.org/)
 - [R for Data Science](https://r4ds.had.co.nz/)

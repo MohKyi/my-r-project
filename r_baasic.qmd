@@ -72,6 +72,7 @@ print(y)
 # Matrices
 ``` {r}
 z <- matrix(1:6, nrow = 2, ncol = 3)
+
 print(z)
 ```
 # Data Frames
@@ -258,4 +259,6 @@ See you in the next lesson!
 Bye!
 ---
 
+
+The current date is `r Sys.Date()`.
 

@@ -1,0 +1,172 @@
+---
+title: "main_type_Robject"
+author: "Moh Kyi"
+format: docx
+editor: visual
+---
+
+# 5 main types of data *objects*
+
+## 1. vector
+
+## 2. matrix
+
+## 3. array
+
+## 4. list
+
+## 5. data frame
+
+# " Function" is a data object too.
+
+# But unction are mainly used to execute R commands and not use as primary.
+
+# 5 actions:
+
+## 1. create component of the data object
+
+## 2. name components of data object
+
+## 3. index( subset) component of
+
+## 4. replace the component
+
+## 5. operate the components of
+
+# Vector
+
+## A vector is a collection of the *same elements*
+
+```{r}
+x <- c(1,2,3,4,5,6,7,8,9,10)
+x
+class(x)
+length(x)
+```
+
+# x is a numeric vector of length 10
+
+## character
+
+```{r}
+animal <- c("dog", "cat", "ant", "monkey")
+class(animal)
+length(animal)
+```
+
+## logical
+
+```{r}
+bo <- c(TRUE,FALSE, T, F, F, T, F, T)
+class(bo)
+length(bo)
+```
+
+## Matrix
+
+## A matrix is a 2- dimension representation of a vector
+
+```{r}
+y <- matrix(x, nrow=3); y
+y <- matrix(x, nrow=2); y
+y <- matrix(x, nrow=4); y
+```
+
+# Array
+
+## Array is an n dimensional representation of a vector
+
+```{r}
+z <- array(x, dim=c(2,3,2)); z
+
+```
+
+```{r}
+z <- array(x, dim=c(2,3,2,2)); z
+```
+
+# List
+
+## List is a collection of columns, each contain any kind of R object
+
+```{r}
+mylist <- list(x,y,z,animal,bo)
+class(mylist)
+```
+
+# Data Frame
+
+## data frame is a tabulr data set. it is a list in tabular form
+
+## Each row is record/ observation
+
+## Each Column variables/ data fields
+
+```{r}
+smoker <- c("Y", "Y", "N", "N", "Y", "Y","N", "N","Y")
+lu_cancer <- c("Y","N","N","Y", "Y", "N", "Y", "Y", "N")
+mydata <- data.frame(smoker,lu_cancer); mydata
+class(mydata)
+```
+
+```{r}
+mydata2 <-  data.frame(name=c("December","Yamin","Aung","Nyan"),
+                       age=c(30,16,30,28),
+                       sex=c("F","F","M", "M"))
+mydata2
+class(mydata2)
+```
+
+```{r}
+mydata3 <- c(smoker,lu_cancer)
+mydata3
+class(mydata3)
+```
+
+# Some more elaboration
+
+## Numeric
+
+```{r}
+x1 <- seq(1,12,1.0)
+x1
+class(x1)
+# 
+```
+
+```{r}
+x2 <- c(1L,12L)
+x2
+class(x2)
+
+```
+
+```{r}
+sex=c("F","F","M", "M")
+class(sex)
+```
+
+```{r}
+edu <- c("illitrate", "read and write", "primary","secondary")
+class(edu)
+edu
+edu_factorize <- factor(edu)
+class(edu_factorize)
+edu_factorize
+```
+
+```{r}
+status <- c("good","better","excellent","good","better","good")
+class(status)
+status
+```
+
+Factorized
+
+```{r}
+status1 <- ordered(status); status1
+```
+
+```{r}
+status2 <- ordered(status, levels=c("good","better","excellent"));status2
+```

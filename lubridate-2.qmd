@@ -1,0 +1,122 @@
+---
+title: "date_time_using lubridate"
+Author: Moh-Moh Kyi
+format: html
+---
+
+## Install the required package and load
+```{r}
+#install.packages("lubridate")
+library(lubridate)
+```
+
+## 1.Parsing date and time
+```{r}
+# Parse Year-Month-Day format
+date1 <- "2023-01-01"
+date2 <- "2023-12-31"
+parsed_date1 <- ymd(date1)
+parsed_date2 <- ymd(date2)
+print(parsed_date1)
+print(parsed_date2)
+```
+
+```{r}
+# Parse Year-Month-Day format with time
+date3 <- "2023-01-01 12:00:00"
+date4 <- "2023-12-31 23:59:59"
+parsed_date3 <- ymd_hms(date3)
+parsed_date4 <- ymd_hms(date4)
+print(parsed_date3)
+print(parsed_date4)
+```
+
+```{r}
+# Parse Month-Day-Year format
+date5 <- "01-01-2023"
+parsed_date5 <- mdy(date5)
+print(parsed_date5)
+```
+
+```{r}
+# Parse Day-Month-Year format
+date6 <- "01-01-2023"
+parsed_date6 <- dmy(date6)
+print(parsed_date6)
+```
+
+## Extracting and Modifying components
+```{r}
+# Extracting components
+year <- year(parsed_date1)
+month <- month(parsed_date1)
+day <- day(parsed_date1)
+print(year)
+print(month)
+print(day)
+```
+
+# Modifying components
+```{r}
+# Modifying components
+modified_date <- parsed_date1 + years(1)
+print(modified_date)
+```
+## 3. Date Arithmetic with Periods and duration
+```{r}
+# Date Arithmetic with Periods
+period <- years(1) + months(6) + days(15)
+new_date <- parsed_date1 + period
+print(new_date)
+```
+```{r}
+# Date Arithmetic with Durations
+duration <- as.duration(365 * 24 * 60 * 60)
+new_date2 <- parsed_date1 + duration
+print(new_date2)
+```
+## 4. Working with Interval
+```{r}
+# Create an interval
+interval <- interval(parsed_date1, parsed_date2)
+print(interval)
+```
+```{r}
+# Check if a specific date falls within the interval
+start_date <- ymd("2023-01-01")
+end_date <- ymd("2023-12-31")
+```
+```{r}
+# Create an interval
+my_interval <- interval(start_date, end_date)
+
+# Check if a specific date falls within the interval
+check_date <- ymd("2023-06-15")
+print(check_date %within% my_interval) # Returns TRUE
+```
+```{r}
+# Calculate the length of the interval in weeks
+print(time_length(my_interval, unit = "weeks"))
+```
+
+## 5. Handling Time Zones
+```{r}
+# Convert to UTC
+utc_date <- with_tz(Sys.Date(), "UTC")
+print(utc_date)
+```
+```{r}
+# Convert to New York time (Eastern Time)
+ny_date <- with_tz(Sys.Date(), "America/New_York")
+print(ny_date)
+```
+```{r}
+# Convert to Berlin time (Central European Time)
+berlin_date <- with_tz(Sys.Date(), "Europe/Berlin")
+print(berlin_date)
+```
+```{r}
+# Convert to Tokyo time (Japan Standard Time)
+tokyo_date <- with_tz(Sys.Date(), "Asia/Tokyo")
+print(tokyo_date)
+```

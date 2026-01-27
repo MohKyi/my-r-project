@@ -1,0 +1,71 @@
+---
+title: "date_time"
+author: "Moh-Moh Kyi"
+format: html
+editor: visual
+---
+
+## date_time
+
+## Julian Date and Calendar Date
+
+```{r}
+bdays <- c("2000-01-01", "2024-06-15", "1995-12-31"); bdays
+class (bdays)
+bdays_julian <- as.Date(bdays); bdays_julian
+class (bdays_julian)
+mode(bdays_julian)
+typeof(bdays_julian)
+```
+
+## Display julian date
+
+```{r}
+as.numeric(bdays_julian)
+```
+
+## calculate age as of today's date
+
+```{r} 
+Sys.Date()
+today <- Sys.Date()
+date <- as.Date("2000-01-13")
+age <- as.numeric (today - date)/365.25
+age
+age2a <- round(age); age2a
+age2b <- trunc(age); age2b
+```
+### as.date - number of days since 1970-01-01
+### want to know the minutes, hours, seconds, etc. should use the code below
+
+```{r}
+date_time <- as.POSIXct("2000-01-13 14:30:00"); date_time
+```
+
+## date formatting
+```{r}
+as.Date("November2 2020", format="%B%d%Y")
+as.Date("11/2/2020", format="%m/%d/%Y")
+as.Date("11/2/20", format="%m/%d/%y")
+as.Date("02November2020", format="%d%B%Y")
+as.Date("/11/02/2020", format="%Y/%m/%d")
+as.Date("2020-11-02")
+as.Date("02/11/2020", format="%d/%m/%Y")  
+```
+## Julian 
+
+```{r}
+my_date <- as.Date("2026-01-26")
+```
+
+## Julian Function ( started from BC 4713 January 1 at 12:00 noon)
+```{r}
+days_since_1970 <- julian(my_date, origin = as.Date("1970-01-01"))
+days_since_1970
+jdate <- as.numeric(days_since_1970)+2440587.5 # get the Julian date because R programming is started from 1970-01-01 
+jdate
+```
+
+## Homework
+## lubridate package
+

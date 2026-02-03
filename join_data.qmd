@@ -1,0 +1,61 @@
+---
+title: "Rt and Lft Join"
+author: "Moh-Moh Kyi"
+format: html
+editor: visual
+---
+
+## Required package
+```{r}
+library(tidyverse)
+```
+
+## Create data frames for example
+```{r}
+band <- data.frame(name=c("Mick", "John", "Paul"),
+                   band_name=c("Rolling Stones", "Beatles", "Beatles"))
+```
+
+
+```{r}
+instrument <- data.frame(name=c("John", "Paul", "Keith"),
+                         plays=c("Guitar", "Bass", "Guitar"))
+```
+
+```{r}
+instrument2 <- data.frame(artist=c("John", "Paul", "Keith"),
+                         plays=c("Guitar", "Bass", "Guitar"))
+```
+
+## Left Join
+```{r}
+lj <- left_join(band, instrument, by="name")
+lj
+```
+## Right Join
+```{r}
+rj <- right_join(band, instrument, by="name")
+rj
+```
+## Full join
+```{r}
+fj <- full_join(band, instrument, by="name")
+fj
+```
+
+## Inner join
+```{r}
+ij <- inner_join(band, instrument, by="name")
+ij
+```
+
+## Left join with different column names
+```{r}
+#lj2 <- left_join(band, instrument2, by="name")
+#lj2
+```
+
+```{r}
+lj2 <- left_join(band, instrument2, by=c("name"="artist"))
+lj2
+```

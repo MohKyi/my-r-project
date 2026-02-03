@@ -1,0 +1,130 @@
+---
+title: "Import_data"
+author: "Moh_Kyi"
+format: html
+editor: visual
+---
+
+## Import the various types of data into R
+
+### Requuired Packages
+
+```{r}
+#install.packages("readr","readxl","data.table","haven","foreign")
+
+library(haven)     # For reading SPSS, Stata, and SAS files
+library(foreign)   # For reading older data formats like .dbf, .dta, .sav
+library(readr)      # For reading CSV files
+library(readxl)     # For reading Excel files
+library(data.table) # For reading large data files efficiently
+library(writexl)   # For writing Excel files
+library(rio)        # For importing and exporting various data formats)
+```
+
+### Import the R data file (.rds, .RData)
+
+```{r}
+# Import rds file
+lbw_rdata <- readRDS("lowbwt.rds")
+```
+
+## Import the delimited text file (.csv, .txt)
+
+```{r}
+# Import the text file
+lbw_txt <- data.table("lowbwt.txt")
+```
+
+```{r}
+# Import the csv file
+lbw_csv <- read_csv("lowbwt.csv")
+```
+
+### Import the Excel file (.xls, .xlsx)
+
+```{r}
+# Import the excel file
+lbw_excel <- read_excel("lowbwt.xls")
+```
+
+### Import the SPSS file (.sav)
+
+```{r}
+# Import the SPSS file
+lbw_spss <- read_sav("lowbwt.sav")
+```
+
+### Import the Stata file (.dta)
+
+```{r}
+# Import the Stata file
+lbw_stata <- read_dta("lowbwt.dta")
+```
+
+### Import the SAS file (.sas7bdat)
+
+```{r}
+# Import the SAS file
+lbw_sas <- read_sas("lowbwt.sas7bdat")
+```
+
+### Import the Epi Info file (.epi)
+
+```{r}
+# Import the Epi Info file
+lbw_epi <- read.dbf("lowbwt.rec")
+```
+
+## Export data from R to various file formats
+
+### save RDS file
+
+```{r} 
+lowbwt  <- read_sav("lowbwt.sav")
+saveRDS(lowbwt, "lowbwt_rds2.rds")
+```
+### Export to CSV file
+```{r}
+write.csv(lowbwt, "lowbwt_revised.csv", row.names=FALSE)
+```
+### Export to Excel file
+```{r}
+write_xlsx(lowbwt, "lowbwt_revised.xlsx")
+```
+## Exporting sav, dta and sas file
+```{r}
+write_sav(lowbwt, "lowbwt_revised.sav")
+write_dta(lowbwt, "lowbwt_revised.dta")
+write_xpt(lowbwt, "lowbwt_revised.sas7bdat")
+```
+
+## check all the available data sets in R
+```{r}
+data()
+cars <- data("mtcars")
+write.csv(cars, "mtcars_data.csv", row.names=FALSE)
+```
+### check all available data sets in Base R only
+```{r}
+data(package="datasets")
+```
+### Check available dat sets in the package "Epi"
+```{r}
+data(package="Epi")
+```
+ ### Import the base R data 
+```{r}
+data("airquality")
+
+```
+## Rio package
+```{r}
+# Import data using rio
+lbw_rio <- import("lowbwt.csv")
+# Export data using rio
+export(lbw_rio, "lowbwt_rio.xlsx")
+```
+
+
+
+

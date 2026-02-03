@@ -1,0 +1,62 @@
+---
+title: "long_wide"
+author: "Moh-Moh Kyi"
+format: html
+editor: visual
+---
+
+## Required library
+```{r}
+library(gapminder)
+library("tidyverse")
+```
+## Load the gapminder dataset
+```{r}
+data("gapminder")
+```
+
+## Extraction of the 1952 and 2007 data from gaminder data set
+```{r}
+gap1952 <-  gapminder[gapminder$year == 1952, ]
+gap2007 <-  gapminder[gapminder$year == 2007, ]
+```
+ ## long form
+```{r}
+le_1952_2007 <- gapminder [gapminder$year %in% c(1952, 2007), c("country", "year", "lifeExp")]
+```
+## wide form
+```{r}
+le_wide <- pivot_wider(le_1952_2007,
+                       names_from = year,
+                       values_from = lifeExp)
+```
+## Name the columns
+```{r}
+names(le_wide)[2] <- "le_1952"
+names(le_wide)[3] <- "le_2007"
+```
+### long form for 1952 and 2007 including all columns
+### wide form including all columns
+```{r}
+#long form gap
+gap_1952_2007 <- gapminder [gapminder$year %in% c(1952, 2007), ]
+```
+
+## wide form gap
+```{r}
+gap_wide <- pivot_wider(gap_1952_2007,
+                       names_from = "year",
+                       values_from = c("lifeExp", "pop", "gdpPercap"))
+```
+## life expentacy changes
+```{r}
+gap_wide$lifeExp_change <- gap_wide$lifeExp_2007 - gap_wide$lifeExp_1952
+```
+
+## Homework
+
+#### per capital gdp changes
+#### population changes
+#### wide form long form conversion for the years 1957 and 1982
+
+

@@ -59,7 +59,7 @@ print(day)
 # Modifying components
 ```{r}
 # Modifying components
-modified_date <- parsed_date1 + years(1)
+modified_date <- parsed_date1 + month(1)
 print(modified_date)
 ```
 ## 3. Date Arithmetic with Periods and duration
@@ -69,6 +69,7 @@ period <- years(1) + months(6) + days(15)
 new_date <- parsed_date1 + period
 print(new_date)
 ```
+
 ```{r}
 # Date Arithmetic with Durations
 duration <- as.duration(365 * 24 * 60 * 60)
@@ -81,11 +82,13 @@ print(new_date2)
 interval <- interval(parsed_date1, parsed_date2)
 print(interval)
 ```
+
 ```{r}
 # Check if a specific date falls within the interval
 start_date <- ymd("2023-01-01")
 end_date <- ymd("2023-12-31")
 ```
+
 ```{r}
 # Create an interval
 my_interval <- interval(start_date, end_date)
@@ -94,6 +97,7 @@ my_interval <- interval(start_date, end_date)
 check_date <- ymd("2023-06-15")
 print(check_date %within% my_interval) # Returns TRUE
 ```
+
 ```{r}
 # Calculate the length of the interval in weeks
 print(time_length(my_interval, unit = "weeks"))
@@ -105,16 +109,19 @@ print(time_length(my_interval, unit = "weeks"))
 utc_date <- with_tz(Sys.Date(), "UTC")
 print(utc_date)
 ```
+
 ```{r}
 # Convert to New York time (Eastern Time)
 ny_date <- with_tz(Sys.Date(), "America/New_York")
 print(ny_date)
 ```
+
 ```{r}
 # Convert to Berlin time (Central European Time)
 berlin_date <- with_tz(Sys.Date(), "Europe/Berlin")
 print(berlin_date)
 ```
+
 ```{r}
 # Convert to Tokyo time (Japan Standard Time)
 tokyo_date <- with_tz(Sys.Date(), "Asia/Tokyo")

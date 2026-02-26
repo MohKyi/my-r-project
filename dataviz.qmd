@@ -1,0 +1,403 @@
+---
+title: "data_viz"
+author: "Moh_kyi"
+format: html
+editor: visual
+---
+
+# Descriptive Statistics and Data Visualization
+
+# Install the required packages and load theie library
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggthemes)
+library(palmerpenguins)
+```
+
+# Load the data
+
+```{r}
+data(penguins)
+```
+
+# View the structure of the data
+
+```{r}
+head(penguins)
+summary(penguins)
+str(penguins)
+glimpse(penguins)
+```
+
+## Data visualization
+
+```{r}
+# step 1
+ggplot(data=penguins)
+```
+
+```{r}
+# step 2
+ggplot(data=penguins,
+       mapping=aes(x=flipper_length_mm,
+                   y=body_mass_g))
+```
+
+```{r}
+# step 3
+ggplot(data=penguins,
+       mapping=aes(x=flipper_length_mm,
+                   y=body_mass_g)) +
+  geom_point()
+```
+
+```{r}
+# step 4
+ggplot(data=penguins,
+       mapping = aes(x=flipper_length_mm,
+                                 y=body_mass_g,
+                                 color=species)) +
+  geom_point()
+```
+
+```{r}
+# step 5
+ggplot(data=penguins,
+       mapping = aes(x=flipper_length_mm,
+                                 y=body_mass_g,
+                                 color=species)) +
+  geom_point() +
+  geom_smooth(method="lm")
+```
+
+```{r}
+# step 6
+ggplot(data=penguins,
+       mapping = aes(x=flipper_length_mm,
+                                 y=body_mass_g
+                                )) +
+  geom_point(mapping=aes(color=species)) +
+  geom_smooth(method="lm")
+```
+
+```{r}
+# step 7
+ggplot(data=penguins,
+       mapping = aes(x=flipper_length_mm,
+                                 y=body_mass_g
+                                )) +
+  geom_point(mapping=aes(color=species,shape= species)) +
+  geom_smooth(method="lm")
+```
+
+```{r}
+# step 8
+ggplot(data=penguins,
+       mapping = aes(x=flipper_length_mm,
+                                 y=body_mass_g
+                                )) +
+  geom_point(mapping=aes(color=species,shape= species)) +
+  geom_smooth(method="lm") +
+  labs(
+    title = "Body mass and flipper length", 
+    subtitle = " Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    shape = "Species"
+  )
+```
+
+```{r}
+# step 9
+ggplot(data=penguins,
+       mapping = aes(x=flipper_length_mm,
+                                 y=body_mass_g
+                                )) +
+  geom_point(mapping=aes(color=species,shape= species)) +
+  geom_smooth(method="lm") +
+  labs(
+    title = "Body mass and flipper length", 
+    subtitle = " Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    shape = "Species"
+  ) +
+  scale_color_colorblind()
+```
+
+```{r}
+# More concise code using the pipe operator
+penguins |>
+  ggplot(aes(x=flipper_length_mm,
+             y=body_mass_g)) +
+  geom_point(aes(color= species, shape= species)) +
+  geom_smooth(method="lm") +
+  labs(
+    title = "Body mass and flipper length",
+    subtitle = " Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length (mm)",
+    y = "Body mass (g)"
+  ) +
+  scale_color_colorblind()
+
+# pipe operator %>% , is used to pass the penguins data frame to ggplot function
+```
+
+## Categorical variables
+```{r}
+# Step 1
+ggplot(penguins, aes(x=species)) +
+  geom_bar()
+```
+
+```{r}
+
+ggplot(penguins, aes(x=species)) +
+  geom_bar(aes(color=species, fill=species)) +
+  labs(
+    title = "Count of penguins by species",
+    x = "Species",
+    y = "Count"
+  ) +
+  scale_color_colorblind() +
+  scale_fill_colorblind()
+  
+```
+
+```{r}
+ggplot(penguins, aes(x=species)) +
+  geom_bar(aes(color=species, fill=species)) +
+  labs(
+    title = "Count of penguins by species",
+    x = "Species",
+    y = "Count"
+  ) +
+  theme_minimal() 
+```
+
+```{r}
+#Odering the bar
+ggplot(penguins, aes(x=fct_infreq(species))) +
+  geom_bar(aes(color=species, fill=species)) +
+  labs(
+    title = "Count of penguins by species",
+    x = "Species",
+    y = "Count"
+  ) +
+  scale_color_colorblind() +
+  scale_fill_colorblind()
+```
+
+## Histograms
+```{r}
+ggplot(penguins, aes(x= body_mass_g)) +
+  geom_histogram (binwidth = 200)
+```
+
+```{r}
+ggplot(penguins, aes(x= body_mass_g)) +
+  geom_histogram (binwidth = 2000)
+```
+  
+```{r}
+ggplot(penguins, aes(x= body_mass_g)) +
+  geom_histogram (binwidth = 20)
+```
+
+## Density plot
+```{r}
+# Step 1
+ggplot(penguins,
+       aes(x = body_mass_g)) +
+  geom_density()
+```
+
+```{r}
+# Step 2
+ggplot(penguins,
+       aes(x = body_mass_g, color= species)) +
+  geom_density(linewidth = 0.75)
+```
+
+```{r}
+# Step 3
+ggplot(penguins,
+       aes(x = body_mass_g, color= species, fill = species)) +
+  geom_density(alpha= 0.1)
+```
+
+```{r}
+ggplot(penguins,
+       aes(x = body_mass_g, color= species, fill = species)) +
+  geom_density(alpha= 0.5)
+##  alpha value of 0.5 makes the density curves more opaque, allowing for better visibility of overlapping areas between species.
+```
+
+## boxplot
+```{r}
+ggplot(penguins, aes(x=species, y=body_mass_g)) +
+  geom_boxplot()
+```
+
+```{r}
+ggplot(penguins, aes(x=species, y=body_mass_g)) +
+  geom_boxplot(aes(color = species, fill = species)) +
+  labs(
+    title = "Boxplot of body mass by species",
+    x = "Species",
+    y = "Body mass (g)"
+  ) +
+  scale_color_colorblind()
+  scale_fill_colorblind()
+```
+
+## stacked bar plot for two categorical variables
+```{r}
+# step 1 
+ggplot(penguins, aes(x= island, fill=species)) +
+  geom_bar()
+```
+
+```{r}
+ggplot(penguins, aes(x= island, fill=species)) +
+  geom_bar(position = "fill") +
+  labs(
+    y= "Proportion")
+```
+## side by side bar plot
+```{r}
+ggplot(penguins, aes(x= island, fill=species)) +
+  geom_bar(position = "dodge") +
+  labs(
+    y= "Count")
+```
+
+## faceted side by side bar plot
+```{r}
+ggplot(penguins, aes(x= island, fill=species)) +
+  geom_bar() +
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(penguins, aes(x= island, fill=species)) +
+  geom_bar(position ="dodge") +
+  labs(
+    y= "Count") +
+  facet_wrap(~species)
+```
+
+## faceted proportion plot
+```{r}
+ggplot(penguins, aes(x= island, fill=species)) +
+  geom_bar(position ="fill") +
+  labs(
+    y= "proportion") +
+  facet_wrap(~species)
+```
+
+## faceted proprtion plot with different scale for each faceted
+```{r}
+ggplot(penguins, aes(x= island, fill=species)) +
+  geom_bar(position ="fill") +
+  labs(
+    y= "proportion") +
+  facet_wrap(~species, scales = "free_y", ncol =1)
+```
+
+## faceted grid for continuous variables
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(species ~ island) 
+```
+
+## Three or more variables with faceted grid
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island) 
+```
+
+## Faceted grid with free scales
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island, scales = "free" ) 
+```
+## faceted grid with free scale and space
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island, scales = "free", space = "free") 
+```
+## faceted grid with free scale and space and row
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island, scales = "free", space = "free", switch = "y") 
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island, scales = "free", space = "free", switch = "y",
+  labeller = labeller(sex= c("female"= "Female Penguins", "male"= "Male Penguins")))
+```
+
+## change the theme of the plot
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island, scales = "free", space = "free", switch = "y",
+  labeller = labeller(sex= c("female"= "Female Penguins", "male"= "Male Penguins"))) +
+  theme(strip.placement = "outside")
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island, scales = "free", space = "free", switch = "y",
+  labeller = labeller(sex= c("female"= "Female Penguins", "male"= "Male Penguins"))) +
+  theme(strip.background = element_rect(fill = "lightblue"))
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island, scales = "free", space = "free", switch = "y",
+  labeller = labeller(sex= c("female"= "Female Penguins", "male"= "Male Penguins"))) +
+  theme(strip.background = element_rect(fill = "lightblue"),
+        strip.text = element_text(size=12, face = "bold", color = "darkblue"))
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island, scales = "free", space = "free", switch = "y",
+  labeller = labeller(sex= c("female"= "Female Penguins", "male"= "Male Penguins"))) +
+  theme(strip.background = element_rect(fill = "lightblue"),
+        strip.text = element_text(size=12, face = "bold", color = "darkblue"),
+        strip.text.x = element_text(size = 8, face = "bold", color = "darkred"),
+        strip.text.y = element_text(size = 8, face = "bold", color = "darkgreen"))
+```
+
+## Saving the plot
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island)) +
+  facet_grid(sex ~ island, scales = "free", space = "free", switch = "y",
+  labeller = labeller(sex= c("female"= "Female Penguins", "male"= "Male Penguins"))) +
+  theme(strip.background = element_rect(fill = "lightblue"),
+        strip.text = element_text(size=12, face = "bold", color = "darkblue"),
+        strip.text.x = element_text(size = 8, face = "bold", color = "darkred"),
+        strip.text.y = element_text(size = 8, face = "bold", color = "darkgreen"))
+ggsave(filename = "penguin_plot.png")
+```

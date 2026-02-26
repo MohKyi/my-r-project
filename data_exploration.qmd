@@ -1,0 +1,190 @@
+---
+title: "bivariate_analysis"
+author: "Moh Kyi"
+format: html
+editor: visual
+---
+
+## Basic commands for summary statistics
+
+```{r}
+# Load the built in dataset
+data1 <- iris
+```
+
+## Summary of the data set
+```{r}
+summary(data1)
+```
+
+## mean of the sepal length
+```{r}
+mean (data1$Sepal.Length)
+```
+## median and sd of the sepal length
+```{r}
+median (data1$Sepal.Length)
+sd (data1$Sepal.Length)
+```
+## percentile 
+```{r}
+quantile (data1$Sepal.Length, 0.1)
+quantile (data1$Sepal.Length, c(0.1,0.9))
+```
+## IQR
+```{r}
+quantile (data1$Sepal.Length, seq(0,1,by=0.25))
+```
+## IQR
+```{r}
+IQR (data1$Sepal.Length)
+```
+## Some functions for data exploration
+```{r}
+x <- c(5,2,2,5,2,5)
+```
+
+```{r}
+duplicated(x)
+```
+
+```{r}
+sum(duplicated(x))
+```
+
+## Import the data file
+
+```{r}
+lbw <- rio::import("lowbwt.dta")
+```
+
+## Explore the data set
+
+```{r}
+summary(lbw) # summary statistics of the data set
+```
+
+```{r}
+str(lbw) # structure of the data set
+```
+
+```{r}
+dim(lbw) # dimension of the data set
+```
+```{r}
+nrow(lbw) # number of rows
+```
+
+```{r}
+ncol(lbw) # number of columns
+```
+
+## to find the duplicate 
+```{r}
+duplicated(lbw)
+```
+
+```{r}
+sum(duplicated(lbw))
+```
+
+## Missing values
+```{r}
+sum(is.na(lbw))
+```
+
+```{r}
+sum(is.na(lbw$id))
+```
+
+```{r}
+# install.packages("mStats")
+library(mStats) # You can use stata command in R
+```
+
+```{r}
+codebook(lbw)
+```
+
+## mean, median,sd, min, max, range, quantile, IQR, variance (var) for birthweight (bwt)
+
+```{r}
+summary(lbw$bwt) # use base R function
+
+```
+
+## Using the mStats package
+```{r}
+summ(lbw, "bwt", "lwt", "age") # mStats function for continuous variables
+```
+
+## data visualization (exploration) of continuous variables
+```{r}
+## histrogram
+## boxplot
+
+hist(lbw$bwt)
+boxplot(lbw$bwt)
+```
+
+## Tables
+```{r}
+table(lbw$smoke) # for categorical variable
+```
+
+```{r}
+table(lbw$smoke, lbw$ht) # two way table
+```
+
+## factorization of the categorical variables
+
+```{r}
+lbw$low <- factor(lbw$low,
+                  levels = c(0,1),
+                  labels =c("BW<=2500g","BW>2500g"))
+```
+
+### Factorized the race variable (white, blck and others)
+```{r}
+lbw$race <- factor(lbw$race,
+                   levels = c(1,2,3),
+                   labels = c("white","black","others"))
+```
+
+## Table of the factorized variables
+```{r}
+table(lbw$race)
+table(lbw$low)
+```
+## proportion table 
+```{r}
+prop.table(table(lbw$low))
+prop.table(table(lbw$low))*100
+round(prop.table(table(lbw$low))*100,1)
+```
+
+## Two way table 
+```{r}
+prop.table(table(lbw$low, lbw$race))
+prop.table(table(lbw$low, lbw$race), 1) # row percentage
+prop.table(table(lbw$low, lbw$race), 2) # column percentage
+round(prop.table(table(lbw$low, lbw$race), 2)*100,1)
+```
+## Simple bar chart
+```{r}
+barplot(table(lbw$low))
+barplot(prop.table(table(lbw$low)))
+barplot(prop.table(table(lbw$low))*100)
+```
+
+```{r}
+mosaicplot((~lbw$race+lbw$low), color=TRUE)
+```
+## using the mStats package
+
+```{r}
+mStats::tab(lbw, "low") # one way table for categorical variable
+mStats::tab(lbw,"race") # one way table for categorical variable
+mStats::tab(lbw,"low", by="race") # two way table for categorical variable
+```
+

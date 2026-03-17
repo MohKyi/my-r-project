@@ -1,0 +1,357 @@
+---
+title: "Bivariate_analysis"
+author: "Moh-Moh Kyi."
+format: html
+editor: visual
+---
+
+## Bivariate analysis
+
+```{r}
+# clear the workplace of the R session
+rm(list = ls())
+```
+
+## Required library
+
+```{r}
+library(tidyverse)
+library (rio)
+library(raster)
+```
+
+## load the data
+
+```{r}
+lbw <- import("lowbwt.csv")
+```
+
+## view the data
+
+```{r}
+head(lbw)
+str(lbw)
+summary(lbw)
+```
+
+## descriptive statistics
+
+```{r}
+mean(lbw$bwt)
+median(lbw$bwt)
+sd(lbw$bwt)
+modal(lbw$bwt, na.rm= TRUE) # descriptive.qmd 
+```
+
+\## Factorize some varibles
+
+```{r}
+lbw$low<- factor(lbw$low,
+                 levels = c(0,1),
+                 labels = c("BW>= 2500 gm", "BW<2500 gm"))
+
+lbw$smoke <- factor (lbw$smoke,
+                     levels=c(0,1),
+                     labels=c("Non-smoker", "smoker"))
+
+lbw$race<- factor (lbw$race,
+                   levels=c(1,2,3),
+                   labels=c("White", "Black", "Others"))
+
+lbw$ht <- factor ( lbw$ht,
+                   levels = c(0,1),
+                   labels=c("Normotensive", "Hypertensive"))
+```
+
+```{r}
+summary(lbw)
+```
+
+## Smokeing and low birth weight
+
+```{r}
+mosaicplot(smoke~low, data= lbw, color=TRUE)
+
+```
+
+```{r}
+table(lbw$smoke, lbw$low)
+addmargins(table(lbw$smoke, lbw$low))
+addmargins(table(lbw$smoke, lbw$low), 1) # column total only
+addmargins(table(lbw$smoke, lbw$low), 2) # row total only
+```
+
+```{r}
+round (addmargins(prop.table(table(lbw$smoke, lbw$low), 1) *100, 2),1)
+```
+
+## Bivariate analysis of the birth weight and smoking
+
+```{r}
+prop.test(table(lbw$smoke, lbw$low)) # Normal approximation
+chisq.test(table(lbw$smoke, lbw$low)) # Chi-square test
+fisher.test(table(lbw$smoke, lbw$low)) # Fisher's exact test
+```
+
+# Homework
+
+##Race and low birth weight \## Hypertension and low birth weight
+
+## If the national mean Birth weight is 3000 gm, is mean birth weight significantly different from the national mean birth weight? - one. sample t test
+
+
+```{r}
+t.test(lbw$bwt, mu=3000) # two sided test
+t.test(lbw$bwt, mu=3000, alternative = "greater") # one sided test
+t.test(lbw$bwt, mu=3000, alternative = "less") # one sided test
+
+```
+# Add the confidence interval of the mean birth weight
+
+```{r}
+t.test(lbw$bwt, mu=3000, conf.level = 0.90)
+```
+ # Non normal distribution
+```{r}
+wilcox.test(lbw$bwt, mu = 3000, conf.int = TRUE, conf.level = 0.95)
+```
+## Question 2 Does the newborns of smoking mothers have mean birth weight significantly different from the newborns of non-smoking mothers? - 
+
+## Answer: Two-sample independent t-test
+```{r}
+boxplot(bwt ~ smoke, data=lbw)
+```
+
+## uses of tapply function
+
+```{r}
+tapply(lbw$bwt, lbw$smoke, summary)
+tapply(lbw$bwt, lbw$smoke, sd)
+tapply(lbw$bwt, lbw$smoke, mean)
+```
+## In two sample t test, we assume the variances of the two groups are equal. We can check this assumption by using the F-test for equality of variances. Equal variance is not assumed, we can use the Welch's t-test, which does not assume equal variances. Equal variance is assumed, we can use the standard two-sample t-test.
+
+## Before performing the t- test, we need to check the assumption of equal variances using the F-test.
+
+### F test to check the equality of variances between the two groups
+```{r}
+var.test(bwt ~ smoke, data=lbw)
+```
+## According to the F- test, p value is  0.2275
+# Since the p-value is greater than the common alpha level of 0.05, we fail to reject the null hypothesis of equal variances. This suggests that there is no significant difference in the variances of birth weights between the newborns of smoking mothers and non-smoking mothers. Therefore, we can proceed with the standard two-sample t-test assuming equal variances.
+ 
+ ```{r}
+ t.test(bwt ~ smoke, data=lbw) # Default is var.equal = FALSE, which means Welch's t-test (equal variance not assumed)
+t.test(bwt ~ smoke, data=lbw, var.equal = TRUE) # standard two-sample t-test (equal variance assumed)
+t.test(bwt ~ smoke, data=lbw, var.equal = FALSE) # Welch's t-test (equal variance not assumed)
+ ```
+## Non normal distribution
+```{r}
+wilcox.test(bwt ~ smoke, data=lbw) # Wilcoxon rank-sum test (Mann-Whitney U test) for non-normal data
+```
+
+
+```{r}
+mStats::summ(lbw,bwt, by=smoke)
+```
+
+## Question 3: Does mean birth weight differ across racial groups?
+
+### Answer: One-way ANOVA
+
+Before ANOVA, check homogeneity of variances (Bartlett's test):
+
+```{r}
+boxplot(bwt ~ race, data = lbw)
+bartlett.test(bwt ~ race, data = lbw)
+```
+
+> **Bartlett's test**: K² = 0.656, df = 2, p = 0.720 → variances are homogeneous; ANOVA assumption met.
+
+```{r}
+anova <- aov(bwt ~ race, data = lbw)
+summary(anova)
+```
+
+> **ANOVA result**: F(2, 186) = 4.95, p = 0.008 → significant overall difference in mean birth weight across racial groups.
+
+---
+
+## Post Hoc Tests: Pairwise Comparisons
+
+Because the overall ANOVA is significant, we need post hoc tests to identify *which* group pairs differ.
+
+### 1. Tukey's HSD (Honestly Significant Difference)
+
+```{r}
+TukeyHSD(anova)
+```
+
+### 2. Holm Correction (pairwise t-tests)
+
+```{r}
+pairwise.t.test(lbw$bwt, lbw$race, p.adjust.method = "holm")
+```
+
+### 3. Bonferroni Correction (pairwise t-tests)
+
+```{r}
+pairwise.t.test(lbw$bwt, lbw$race, p.adjust.method = "bonferroni")
+```
+
+---
+
+## Comparison of Post Hoc Methods
+
+| Comparison | Tukey HSD (p adj) | Holm (p adj) | Bonferroni (p adj) |
+|---|---|---|---|
+| Black vs White | 0.042 | 0.032 | 0.048 |
+| Others vs White | 0.025 | 0.028 | 0.028 |
+| Others vs Black | 0.866 | 0.610 | 1.000 |
+
+### Nature of Each Test
+
+**Tukey's HSD**
+
+- Designed specifically for post hoc comparison of *all pairwise group means* after ANOVA
+- Controls the **family-wise error rate (FWER)** assuming equal group sizes and equal variances
+- Uses the studentized range distribution; generally the most powerful method when all pairwise comparisons are of interest and ANOVA assumptions hold
+
+**Holm Correction**
+
+- A **sequential Bonferroni** (step-down) procedure
+- Orders raw p-values from smallest to largest and adjusts each by multiplying by (m − rank + 1), where m = number of comparisons
+- **Less conservative** than Bonferroni; maintains FWER but with greater statistical power
+- No assumption of equal variances or equal group sizes
+
+**Bonferroni Correction**
+
+- The simplest and most conservative method: multiplies each raw p-value by the total number of comparisons (m = 3)
+- Maintains FWER at α = 0.05 across all tests
+- **Most conservative** → highest p-values → lowest power; may produce p adj > 1 (capped at 1.000)
+
+### Best Correction for This Situation
+
+**Recommended: Tukey's HSD**
+
+Given that:
+1. ANOVA assumptions are met (Bartlett's p = 0.720 → homogeneous variances)
+2. We are comparing **all possible pairs** of a single factor (race: 3 groups)
+3. Sample sizes are moderately unequal but groups are not extreme
+
+Tukey's HSD is the **most appropriate** choice. It is specifically designed for this exact scenario, offers better power than Bonferroni and Holm, and controls FWER properly.
+
+Use **Holm** as an alternative when ANOVA assumptions are questionable (e.g., after Kruskal-Wallis) or when not all pairs are of equal interest.
+
+Avoid **Bonferroni** here — it is unnecessarily conservative with only 3 comparisons, producing inflated p-values (Others vs Black = 1.000) that may mask true effects.
+
+---
+
+## Academic Report
+
+> A one-way ANOVA found a statistically significant difference in mean birth weight across racial groups (F(2, 186) = 4.95, p = 0.008). Bartlett's test confirmed homogeneity of variances (K² = 0.656, p = 0.720). Post hoc pairwise comparisons using Tukey's HSD revealed that newborns of Black mothers had significantly lower mean birth weight compared to White mothers (mean difference = −383.3 g, 95% CI: −756.4 to −10.3, p = 0.042), and newborns of mothers from Other racial groups also had significantly lower birth weight than White mothers (mean difference = −299.0 g, 95% CI: −567.6 to −30.4, p = 0.025). No significant difference was observed between Black and Other groups (mean difference = 84.3 g, 95% CI: −305.5 to +474.2, p = 0.866). These findings were consistent across Holm and Bonferroni corrections, supporting the robustness of the results.
+
+## Pair T-test
+## Question 3:  Do Ten people in a therapeutic intervention program before and after the trial have a significant improvement in sleeping hours after taking the new slepping pills? - Paired t-test
+
+
+```{r}
+bfsleep <- c( 8,7,6,5,10,11,6,6,7,5)
+afsleep <- c( 10,7,8,6,9,12,9,8,8,8)
+sleep <- data.frame (bfsleep, afsleep)
+sleep
+```
+## pair t-test
+```{r}
+sleep$dif_sleep <- sleep$afsleep - sleep$bfsleep
+mean(sleep$dif_sleep)
+sd(sleep$dif_sleep)
+```
+
+```{r}
+t.test(afsleep, bfsleep, paired = TRUE, data=sleep) # Paired t-test
+```
+# When the mean of the difference is one and sd is 0, the t-test will not be able to calculate the t-statistic and p-value because the standard deviation of the differences is zero. This means that all the differences are the same (in this case, 1), and there is no variability in the data to perform the test. In such cases, the t-test is not appropriate, and we cannot conclude whether there is a significant improvement in sleeping hours after taking the new sleeping pills. 
+## Why? Because the t-test relies on the variability of the data to determine if there is a significant difference between the two groups. When there is no variability (i.e., all differences are the same), the t-test cannot compute a meaningful statistic, and it will return an error or indicate that the test cannot be performed.
+## Why should the Binomial test be used? Because the Binomial test is used to determine if the number of successes (in this case, the number of people who improved their sleeping hours) is significantly different from what would be expected by chance. In this scenario, since all individuals showed improvement (i.e., all differences are positive), we can use the Binomial test to assess whether the observed number of improvements is statistically significant compared to a null hypothesis where improvements occur randomly.
+
+## Non parametric test for paired data
+```{r}
+wilcox.test(afsleep, bfsleep, paired = TRUE, data=sleep) # Wilcoxon signed-rank test for non-normal paired data
+```
+# explain about the Wilcoxon signed-rank test in this context. The Wilcoxon signed-rank test is a non-parametric statistical test used to compare two related samples, matched samples, or repeated measurements on a single sample to assess whether their population mean ranks differ. In the context of the sleeping hours before and after taking the new sleeping pills, the Wilcoxon signed-rank test would be appropriate if the differences in sleeping hours do not follow a normal distribution. This test evaluates whether the median difference between the paired observations (before and after) is significantly different from zero, which would indicate a significant improvement in sleeping hours after taking the pills.
+
+# How to check the normality of the differences in sleeping hours before and after taking the pills? You can check the normality of the differences by using graphical methods such as a histogram or a Q-Q plot, or by performing a statistical test for normality such as the Shapiro-Wilk test. If the differences are normally distributed, you can proceed with the paired t-test; if not, you should use the Wilcoxon signed-rank test.
+
+# Q Q plot for the differences in sleeping hours
+```{r}
+qqnorm(sleep$dif_sleep)
+qqline(sleep$dif_sleep)
+
+```
+## How to interpreat the Q-Q plot? The Q-Q plot (quantile-quantile plot) is a graphical tool used to assess whether a set of data follows a particular distribution, in this case, the normal distribution. In the Q-Q plot for the differences in sleeping hours, if the points approximately follow a straight line (the qqline), it suggests that the differences are normally distributed. If the points deviate significantly from the line, it indicates that the differences may not be normally distributed, and you may need to consider using a non-parametric test like the Wilcoxon signed-rank test instead of the paired t-test.
+
+# Shapiro-Wilk test for normality of the differences
+```{r}
+shapiro.test(sleep$dif_sleep)
+```
+# According the Shapiro-Wilk test, if the p-value is 0.4453
+# Since the p-value is greater than the common alpha level of 0.05, we fail to reject the null hypothesis of normality. This suggests that the differences in sleeping hours before and after taking the pills are normally distributed, and therefore, it would be appropriate to use the paired t-test for analyzing the data.
+
+## Question 4: Do the mean birth weights of newborns differ significantly among the three racial groups (White, Black, Others)? - One-way ANOVA
+
+# Anova test
+```{r}
+boxplot(bwt ~ race, data=lbw) # boxplot by base R
+```
+# Testing the homogeneity of variances assumption for ANOVA
+```{r}
+bartlett.test(bwt ~ race, data=lbw) # Bartlett's test for homogeneity of variances
+```
+# According to the Bartlett's test, if the pvlue is 0.7204
+# Since the p-value is greater than the common alpha level of 0.05, we fail to reject the null hypothesis of homogeneity of variances. This suggests that the variances of birth weights among the three racial groups (White, Black, Others) are not significantly different, and therefore, it would be appropriate to proceed with the one-way ANOVA test to compare the mean birth weights among these groups.
+
+# One-way ANOVA test
+```{r}
+anova<- aov(bwt ~ race, data=lbw)
+summary(anova)
+```
+## Post- hoc test for multiple comparisons
+```{r}
+TukeyHSD(anova)
+```
+## Pairwise t-test with Bonferroni correction
+```{r}
+pairwise.t.test(lbw$bwt, lbw$race, p.adjust.method = "holm")
+pairwise.t.test(lbw$bwt, lbw$race, p.adjust.method = "bonferroni")
+```
+## Explain the test of Holm and Bonferroni correction. The Holm and Bonferroni corrections are methods used to adjust p-values when performing multiple comparisons to control the family-wise error rate. The Bonferroni correction is a more conservative method that divides the significance level (alpha) by the number of comparisons, while the Holm correction is a stepwise method that adjusts p-values in a sequential manner, starting with the smallest p-value. Both methods aim to reduce the likelihood of Type I errors (false positives) when conducting multiple statistical tests.
+
+## Non parametric test for comparing more than two groups
+```{r}
+kruskal.test(bwt ~ race, data=lbw) # Kruskal-Wallis test for non-normal data
+```
+
+# According to the Kruskal-Wallis test, if the p-value is 0.01389
+# Since the p-value is less than the common alpha level of 0.05, we reject the null hypothesis of equal distributions. This suggests that there is a statistically significant difference in birth weights among the three racial groups (White, Black, Others). Therefore, we can conclude that at least one of the groups has a different distribution of birth weights compared to the others, and further post hoc tests may be needed to identify which specific groups differ from each other.
+
+# Question 5 : Are the newborns' weight linerarly correlated with the maternal body wight? - Correlation analysis
+
+## linear correlation and linear regression can be used
+```{r}
+# Single scatter plot
+plot(lwt~bwt, data=lbw)
+abline(lm(lwt ~ bwt, data=lbw), col="red") # add a regression line to the scatter plot
+```
+## Multiple scatter plot
+```{r}
+library(GGally)
+ggpairs(lbw[, c("bwt", "lwt", "age")]) # scatter plot matrix for multiple variables
+```
+## In the multiple scatter plot, the interpretation of the correlation value reflects the strength and direction of the linear relationship between two variables. The correlation coefficient (r) ranges from -1 to 1, where:
+- A value of 1 indicates a perfect positive linear relationship, meaning that as one variable increases, the other variable also increases proportionally.
+- A value of -1 indicates a perfect negative linear relationship, meaning that as one variable increases, the other variable decreases proportionally.
+- A value of 0 indicates no linear relationship between the variables, meaning that changes in one variable do not predict changes in the other variable.
+- Values between 0 and 1 indicate a positive correlation, with values closer to 1 indicating a stronger positive relationship, while values between -1 and 0 indicate a negative correlation, with values closer to -1 indicating a stronger negative relationship. The correlation value helps to understand the degree to which two variables are linearly related, but it does not imply causation.
+ 
+
